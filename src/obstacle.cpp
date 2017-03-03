@@ -17,7 +17,3 @@ void Obstacle::SetCenter(double x, double y)
    centerY = y;
 }
 
-virtual double Obstacle::Beta(double x, double y)
-{
-   return 0;
-}
