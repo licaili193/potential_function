@@ -34,7 +34,7 @@ int main(int argc, char **argv)
   gr.Cont(dat,"y");	// plot yellow contour lines
   gr.Axis();		// draw axis
   gr.WriteFrame("sample.png");	// save it
-                                         // Wait for a keystroke in the window
+
   ROS_INFO("Object created!");
 
   ros::spin();

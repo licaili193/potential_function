@@ -1,31 +1,110 @@
 #include "ros/ros.h"
 #include "std_msgs/String.h"
-#include <opencv2/core/core.hpp>
-#include <opencv2/highgui/highgui.hpp>
+#include <wx/wxprec.h>
+#ifndef WX_PRECOMP
+    #include <wx/wx.h>
+#endif
 
-using namespace cv;
+#include <wx/timer.h>
+#include <mgl2/mgl.h>
 
-int main(int argc, char **argv)
+#include "nf_visualization.h"
+
+#include <iostream>
+
+void ROSTimer::Notify()
 {
-  ros::init(argc, argv, "nf_visualization");
-  ros::NodeHandle n;
-  ROS_INFO("This node will create a window for visualization.");
+    ros::spinOnce();
+    ROS_INFO("ROS Spined.");
+}
+ 
+void ROSTimer::start()
+{
+    wxTimer::Start(1000);
+}
 
-  Mat image;
-  image = imread("sample.png", CV_LOAD_IMAGE_COLOR);   // Read the file
+MainFrame::MainFrame(wxWindow* parent, int id, const wxString& title, const wxPoint& pos, const wxSize& size, long style):
+    wxFrame(parent, id, title, pos, size, wxDEFAULT_FRAME_STYLE)
+{
+    // begin wxGlade: MainFrame::MainFrame
+    sizer_1_staticbox = new wxStaticBox(this, -1, wxT("sizer_1"));
+    graphPanel = new wxPanel(this, wxID_ANY);
 
-  if(! image.data )                              // Check for invalid input
-  {
-      ROS_INFO("Cannot show image.");
-      return -1;
-  }
+    set_properties();
+    do_layout();
 
-  namedWindow( "Display window", WINDOW_AUTOSIZE );// Create a window for display.
-  imshow( "Display window", image );                   // Show our image inside it.
-  waitKey(0);     
+    timer = new ROSTimer();
+    timer->start();
+    // end wxGlade
+}
 
-  ros::spin();
-  return 0;
+
+void MainFrame::set_properties()
+{
+    // begin wxGlade: MainFrame::set_properties
+    SetTitle(wxT("Main Window"));
+    // end wxGlade
+}
+
+
+void MainFrame::do_layout()
+{
+    // begin wxGlade: MainFrame::do_layout
+    wxStaticBoxSizer* sizer_1 = new wxStaticBoxSizer(sizer_1_staticbox, wxVERTICAL);
+    sizer_1->Add(graphPanel, 1, wxEXPAND, 0);
+    SetSizer(sizer_1);
+    sizer_1->Fit(this);
+    Layout();
+    // end wxGlade
+}
+
+void MainFrame::OnPaint(wxPaintEvent &event)
+{
+
+	int w,h;
+	w=0;h=0;
+
+	graphPanel->GetClientSize(&w,&h);
+	
+	if(!w || !h)
+		return;
+
+	mglGraph gr;
+        std::cout<<"Width: "<<w<<" Height: "<<h<<std::endl;
+
+	thePlot.drawPlot(&gr);	
+	
+	wxDC *dc=0;
+	dc=new wxClientDC(graphPanel);
+
+
+	
+	wxImage img(600,400,const_cast<unsigned char*>(gr.GetRGB()),true);
+
+	dc->DrawBitmap(wxBitmap(img),0,0);
+	delete dc;
+}
+
+
+class GraphTestApp: public wxApp {
+public:
+    bool OnInit();
+};
+
+IMPLEMENT_APP(GraphTestApp)
+
+bool GraphTestApp::OnInit()
+{
+    wxInitAllImageHandlers();
+    MainFrame* mainFrame = new MainFrame(NULL, wxID_ANY, wxEmptyString, wxPoint(50, 50), wxSize(450, 340));
+    SetTopWindow(mainFrame);
+    mainFrame->Show();
+
+    ros::init(argc, argv, "nf_visualization");
+    ros::NodeHandle n;
+    ROS_INFO("This node will create a window for visualization.");
+
+    return true;
 }
 
 
