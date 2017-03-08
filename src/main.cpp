@@ -1,44 +1,33 @@
 #include "ros/ros.h"
 #include "std_msgs/String.h"
-#include <mgl2/mgl.h>
-#include <opencv2/core/core.hpp>
-#include <opencv2/highgui/highgui.hpp>
 
-#include "obstacle.h"
+#include <iostream>
+#include <string>
 
-using namespace cv;
-
-int sample(mglGraph *gr)
-{
-  gr->Rotate(60,40);
-  gr->Box();
-  return 0;
-}
+using namespace std;
 
 int main(int argc, char **argv)
 {
-  ros::init(argc, argv, "nf_tester");
-  ros::NodeHandle n;
-  ROS_INFO("Hello World!");
+    bool isRun = true;
+    ros::init(argc, argv, "nf_tester");
+    ros::NodeHandle n;
+    ROS_INFO("Hello World!");
+    ros::Publisher nf_pub = n.advertise<std_msgs::String>("nf_cmd", 1000);
+  
+    while(isRun)
+    {
+        string cmd;
+        cout<<"Please input the command: ";
+        cin>>cmd;
+        
+        std_msgs::String msg;
+        msg.data = cmd.c_str();
 
-  Obstacle O(0,0);
-
-  mglData dat(30,40);	// data to for plotting
-  for(long i=0;i<30;i++)   for(long j=0;j<40;j++)
-    dat.a[i+30*j] = 1/(1+(i-15)*(i-15)/225.+(j-20)*(j-20)/400.);
-
-  mglGraph gr;		// class for plot drawing
-  gr.Rotate(50,60);	// rotate axis
-  gr.Light(true);	// enable lighting
-  gr.Surf(dat);		// plot surface
-  gr.Cont(dat,"y");	// plot yellow contour lines
-  gr.Axis();		// draw axis
-  gr.WriteFrame("sample.png");	// save it
-
-  ROS_INFO("Object created!");
-
-  ros::spin();
-  return 0;
+        nf_pub.publish(msg);
+        ros::spinOnce();
+        if(cmd=="exit") {isRun=false; break;}
+    }
+    return 0;
 }
 
 

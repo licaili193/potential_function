@@ -9,7 +9,6 @@ find_package(catkin REQUIRED COMPONENTS
   std_msgs
 )
 
-find_package(OpenCV 3 REQUIRED)
 find_package(wxWidgets COMPONENTS core base REQUIRED)
 
 catkin_package(
@@ -27,18 +26,16 @@ include_directories(
   include/mathgl
 )
 
-add_executable(nf_tester src/main.cpp src/obstacle.cpp)
+add_executable(nf_tester src/main.cpp)
 
 target_link_libraries(nf_tester
    ${catkin_LIBRARIES}
-   ${mgl2_LIBRARIES}
 )
 
-add_executable(nf_visualization src/nf_visualization.cpp src/plot.cpp)
+add_executable(nf_visualization src/nf_visualization.cpp src/roslistener.cpp src/plot.cpp)
 
 target_link_libraries(nf_visualization
    ${catkin_LIBRARIES}
-   ${OpenCV_LIBRARIES}
    ${wxWidgets_LIBRARIES}
    ${mgl2_LIBRARIES}
 )

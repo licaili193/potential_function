@@ -42,7 +42,6 @@ public:
     wxPanel* graphPanel;
     // end wxGlade
 
-    ROSTimer* timer;
 protected:
     DECLARE_EVENT_TABLE()
 }; // wxGlade: end class

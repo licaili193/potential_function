@@ -9,19 +9,9 @@
 #include <mgl2/mgl.h>
 
 #include "nf_visualization.h"
+#include "roslistener.h"
 
 #include <iostream>
-
-void ROSTimer::Notify()
-{
-    ros::spinOnce();
-    ROS_INFO("ROS Spined.");
-}
- 
-void ROSTimer::start()
-{
-    wxTimer::Start(1000);
-}
 
 MainFrame::MainFrame(wxWindow* parent, int id, const wxString& title, const wxPoint& pos, const wxSize& size, long style):
     wxFrame(parent, id, title, pos, size, wxDEFAULT_FRAME_STYLE)
@@ -29,12 +19,11 @@ MainFrame::MainFrame(wxWindow* parent, int id, const wxString& title, const wxPo
     // begin wxGlade: MainFrame::MainFrame
     sizer_1_staticbox = new wxStaticBox(this, -1, wxT("sizer_1"));
     graphPanel = new wxPanel(this, wxID_ANY);
+    graphPanel->SetMinClientSize(wxSize(800,800));
 
     set_properties();
     do_layout();
 
-    timer = new ROSTimer();
-    timer->start();
     // end wxGlade
 }
 
@@ -60,7 +49,6 @@ void MainFrame::do_layout()
 
 void MainFrame::OnPaint(wxPaintEvent &event)
 {
-
 	int w,h;
 	w=0;h=0;
 
@@ -68,10 +56,10 @@ void MainFrame::OnPaint(wxPaintEvent &event)
 	
 	if(!w || !h)
 		return;
-
-	mglGraph gr;
-        std::cout<<"Width: "<<w<<" Height: "<<h<<std::endl;
-
+	mglGraph gr(w,h);
+        
+        gr.SetSize(w,h);
+        gr.InPlot(-0.1,1.1,-0.1,1.1);
 	thePlot.drawPlot(&gr);	
 	
 	wxDC *dc=0;
@@ -79,7 +67,7 @@ void MainFrame::OnPaint(wxPaintEvent &event)
 
 
 	
-	wxImage img(600,400,const_cast<unsigned char*>(gr.GetRGB()),true);
+	wxImage img(w,h,const_cast<unsigned char*>(gr.GetRGB()),true);
 
 	dc->DrawBitmap(wxBitmap(img),0,0);
 	delete dc;
@@ -89,6 +77,7 @@ void MainFrame::OnPaint(wxPaintEvent &event)
 class GraphTestApp: public wxApp {
 public:
     bool OnInit();
+    ROSListener rl;
 };
 
 IMPLEMENT_APP(GraphTestApp)
@@ -99,11 +88,8 @@ bool GraphTestApp::OnInit()
     MainFrame* mainFrame = new MainFrame(NULL, wxID_ANY, wxEmptyString, wxPoint(50, 50), wxSize(450, 340));
     SetTopWindow(mainFrame);
     mainFrame->Show();
-
-    ros::init(argc, argv, "nf_visualization");
-    ros::NodeHandle n;
-    ROS_INFO("This node will create a window for visualization.");
-
+    
+    rl.Start();
     return true;
 }
 
