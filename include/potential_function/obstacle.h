@@ -1,5 +1,5 @@
 #ifndef __OBSTACLE
-#define __OBsTACLE
+#define __OBSTACLE
 
 class Obstacle
 {
