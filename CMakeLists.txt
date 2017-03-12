@@ -32,7 +32,16 @@ target_link_libraries(nf_tester
    ${catkin_LIBRARIES}
 )
 
-add_executable(nf_visualization src/nf_visualization.cpp src/roslistener.cpp src/visualizer.cpp src/world.cpp src/obstacle.cpp src/sphere.cpp)
+add_executable(nf_visualization 
+src/nf_visualization.cpp 
+src/roslistener.cpp 
+src/visualizer.cpp 
+src/world.cpp 
+src/obstacle.cpp 
+src/sphere.cpp 
+src/square.cpp
+src/sphereWorld.cpp
+src/starWorld.cpp)
 
 target_link_libraries(nf_visualization
    ${catkin_LIBRARIES}

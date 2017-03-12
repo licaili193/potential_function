@@ -9,7 +9,9 @@
 
 #include "visualizer.h"
 #include "sphere.h"
-#include "world.h"
+#include "sphereWorld.h"
+#include "square.h"
+#include "starWorld.h"
 
 // begin wxGlade: ::extracode
 // end wxGlade
@@ -37,7 +39,14 @@ public:
     //THE PLOT THINGS
 	Visualizer thePlot;
     Sphere theSphere;
-    World theWorld;
+    Sphere theSphere1;
+    Sphere theSphere2;
+    SphereWorld theWorld;
+
+    Square theSquare;
+    Square theSquare1;
+    Square theSquare2;
+    StarWorld theWorld1;
 
     // begin wxGlade: MainFrame::attributes
     wxStaticBox* sizer_1_staticbox;

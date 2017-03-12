@@ -16,13 +16,15 @@
 
 class Visualizer
 {
-	mglData _contourData,_mainData,_backgroundData;
+	mglData _contourData,_mainData,_backgroundData,_zeroX,_zeroY;
 	double _xStart, _xEnd, _yStart, _yEnd;
 public:
 	Visualizer();
 
 	virtual void DrawPlot(mglGraph *graph);
 	void SetBoundaryPlotData(World &w);
+	void SetPotentialPlotData(World &w);
+	void SetZeroPlotData(World &w);
 };
 
 #endif

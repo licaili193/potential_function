@@ -29,10 +29,46 @@ MainFrame::MainFrame(wxWindow* parent, int id, const wxString& title, const wxPo
 
 
     theSphere.SetCenter(0,0);
-    theSphere.SetRadius(2);
-    theWorld.SetFrame(-4,4,-4,4,0.02);
+    theSphere.SetRadius(6);
+    theSphere1.SetCenter(2,2);
+    theSphere1.SetRadius(0.5);
+    theSphere2.SetCenter(-2,-2);
+    theSphere2.SetRadius(0.5);
+    theWorld.SetFrame(-6.2,6.2,-6.2,6.2,0.02);
     theWorld.mainObs = &theSphere;
-    thePlot.SetBoundaryPlotData(theWorld);
+    theWorld.obsArray.push_back(&theSphere1);
+    theWorld.obsArray.push_back(&theSphere2);
+    theWorld.destX = -3.2;
+    theWorld.destY = 3.2;
+    theWorld.rBubble = 0.2;
+    theWorld.kappa = 4;
+
+    theSquare.SetCenter(0,0);
+    theSquare.SetRadius(4);
+    theSquare.SetScale(1,1);
+    theSquare.parentObs = &theSphere;
+    theSquare1.SetCenter(2,2);
+    theSquare1.SetRadius(0.6);
+    theSquare1.SetScale(1,1);
+    theSquare1.parentObs = &theSphere1;
+    theSquare2.SetCenter(-2,-2);
+    theSquare2.SetRadius(0.6);
+    theSquare2.SetScale(1,1);
+    theSquare2.parentObs = &theSphere2;
+    theWorld1.SetFrame(-4.2,4.2,-4.2,4.2,0.02);
+    theWorld1.mainObs = &theSquare;
+    theWorld1.obsArray.push_back(&theSquare1);
+    theWorld1.obsArray.push_back(&theSquare2);
+    theWorld1.destX = -3.2;
+    theWorld1.destY = 3.2;
+    theWorld1.rBubble = 0.2;
+    theWorld1.kappa = 50000;
+    theWorld1.SetParentWorld(&theWorld);
+
+    thePlot.SetBoundaryPlotData(theWorld1);
+    thePlot.SetPotentialPlotData(theWorld1);
+    thePlot.SetZeroPlotData(theWorld1);
+
 
     set_properties();
     do_layout();

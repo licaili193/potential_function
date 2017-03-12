@@ -5,7 +5,7 @@ using namespace std;
 
 Sphere::Sphere()
 {
-    
+
 }
 
 Sphere::Sphere(double x, double y, double r) : Obstacle(x, y)
@@ -21,4 +21,9 @@ void Sphere::SetRadius(double r)
 double Sphere::Beta(double x, double y)
 {
     return (x - centerX)*(x - centerX) + (y - centerY)*(y - centerY) - radius*radius;
+}
+
+double Sphere::Rho(double x, double y)
+{
+    return radius;
 }

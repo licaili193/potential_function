@@ -10,6 +10,7 @@ public:
     Sphere();
     Sphere(double x, double y, double r);
     double Beta(double x, double y);
+    double Rho(double x, double y);
     void SetRadius(double r);
 };
 
