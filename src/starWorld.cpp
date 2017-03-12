@@ -2,6 +2,8 @@
 #include <vector>
 #include <cmath>
 
+#include <iostream>
+
 using namespace std;
 
 StarWorld::StarWorld()
@@ -14,7 +16,7 @@ StarWorld::StarWorld(double xs, double xe, double ys, double ye, double st, Obst
 
 }
 
-void StarWorld::Ti(double x, double y, StarTiInfo &ti,  double &resX, double &resY)
+void StarWorld::Ti(double x, double y, StarTiInfo &ti,  double &resX, double &resY, bool isMain, double maxMain)
 {
     if(ti.x0==x&&ti.y0==y)
     {
@@ -24,7 +26,9 @@ void StarWorld::Ti(double x, double y, StarTiInfo &ti,  double &resX, double &re
     }
 
     double norm = sqrt((x-ti.x0)*(x-ti.x0)+(y-ti.y0)*(y-ti.y0));
-    double v = sqrt(1+ti.betaSon)*ti.rhoParent/norm;
+    double v;
+    if(isMain) v = (1-ti.betaSon/maxMain)*ti.rhoParent/norm;
+    else v = (1+ti.betaSon)*ti.rhoParent/norm;
 
     resX = v*(x-ti.x0)+ti.x0;
     resY = v*(y-ti.y0)+ti.y0;
@@ -64,7 +68,7 @@ double StarWorld::PotentialValue(double x, double y, double kappa)
 
     double tempX, tempY;
     StarTiInfo T0 = {mainObs->centerX,mainObs->centerY,mainObs->parentObs->Rho(x,y),-theBeta};
-    Ti(x,y,T0,tempX,tempY);
+    Ti(x,y,T0,tempX,tempY,true,mainObs->GetMax());
 
     double resX = theS*x+s0*tempX;
     double resY = theS*y+s0*tempY;

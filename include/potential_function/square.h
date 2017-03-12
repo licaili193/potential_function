@@ -13,6 +13,7 @@ public:
     double Rho(double x, double y);
     void SetRadius(double r);
     void SetScale(double sx, double sy, double _s = 0.99);
+    double GetMax();
 };
 
 #endif

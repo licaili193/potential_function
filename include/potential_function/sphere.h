@@ -12,6 +12,7 @@ public:
     double Beta(double x, double y);
     double Rho(double x, double y);
     void SetRadius(double r);
+    double GetMax();
 };
 
 #endif

@@ -41,7 +41,7 @@ MainFrame::MainFrame(wxWindow* parent, int id, const wxString& title, const wxPo
     theWorld.destX = -3.2;
     theWorld.destY = 3.2;
     theWorld.rBubble = 0.2;
-    theWorld.kappa = 4;
+    theWorld.kappa = 1.9;
 
     theSquare.SetCenter(0,0);
     theSquare.SetRadius(4);
@@ -62,12 +62,48 @@ MainFrame::MainFrame(wxWindow* parent, int id, const wxString& title, const wxPo
     theWorld1.destX = -3.2;
     theWorld1.destY = 3.2;
     theWorld1.rBubble = 0.2;
-    theWorld1.kappa = 50000;
+    theWorld1.kappa = 5000;
     theWorld1.SetParentWorld(&theWorld);
 
-    thePlot.SetBoundaryPlotData(theWorld1);
-    thePlot.SetPotentialPlotData(theWorld1);
-    thePlot.SetZeroPlotData(theWorld1);
+    theSquare3.SetCenter(2,1.4);
+    theSquare3.SetRadius(0.6);
+    theSquare3.SetScale(1,2);
+    theSquare3.parentObs = &theSphere1;
+    theWorld2.SetFrame(-4.2,4.2,-4.2,4.2,0.02);
+    theWorld2.mainObs = &theSquare;
+    theWorld2.obsArray.push_back(&theSquare1);
+    theWorld2.obsArray.push_back(&theSquare2);
+    theWorld2.obsArray.push_back(&theSquare3);
+    theWorld2.destX = -3.2;
+    theWorld2.destY = 3.2;
+    theWorld2.rBubble = 0.2;
+    theWorld2.kappa = 100000;
+    theWorld2.virtObs = &theSquare1;
+    theWorld2.newObs = &theSquare3;
+    theWorld2.SetParentWorld(&theWorld1);
+
+    theSquare4.SetCenter(1.4,2);
+    theSquare4.SetRadius(0.6);
+    theSquare4.SetScale(2,1);
+    theSquare4.parentObs = &theSphere1;
+    theWorld3.SetFrame(-4.2,4.2,-4.2,4.2,0.02);
+    theWorld3.mainObs = &theSquare;
+    theWorld3.obsArray.push_back(&theSquare1);
+    theWorld3.obsArray.push_back(&theSquare2);
+    theWorld3.obsArray.push_back(&theSquare3);
+    theWorld3.obsArray.push_back(&theSquare4);
+    theWorld3.destX = -3.2;
+    theWorld3.destY = 3.2;
+    theWorld3.rBubble = 0.2;
+    theWorld3.kappa = 3000000;
+    theWorld3.virtObs = &theSquare1;
+    theWorld3.newObs = &theSquare4;
+    theWorld3.SetParentWorld(&theWorld2);
+
+
+    thePlot.SetBoundaryPlotData(theWorld3);
+    thePlot.SetPotentialPlotData(theWorld3);
+    thePlot.SetZeroPlotData(theWorld3);
 
 
     set_properties();

@@ -27,3 +27,9 @@ double Sphere::Rho(double x, double y)
 {
     return radius;
 }
+
+
+double Sphere::GetMax()
+{
+    return radius*radius;
+}

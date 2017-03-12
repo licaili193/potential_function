@@ -12,6 +12,7 @@
 #include "sphereWorld.h"
 #include "square.h"
 #include "starWorld.h"
+#include "purgedWorld.h"
 
 // begin wxGlade: ::extracode
 // end wxGlade
@@ -47,6 +48,12 @@ public:
     Square theSquare1;
     Square theSquare2;
     StarWorld theWorld1;
+
+    Square theSquare3;
+    PurgedWorld theWorld2;
+
+    Square theSquare4;
+    PurgedWorld theWorld3;
 
     // begin wxGlade: MainFrame::attributes
     wxStaticBox* sizer_1_staticbox;

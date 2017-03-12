@@ -11,7 +11,7 @@ struct StarTiInfo
 
 class StarWorld : public World
 {
-    void Ti(double x, double y, StarTiInfo &ti, double &resX, double &resY);
+    void Ti(double x, double y, StarTiInfo &ti, double &resX, double &resY, bool isMain = false, double maxMain = 1);
 
 public:
     StarWorld();

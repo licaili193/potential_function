@@ -43,5 +43,5 @@ void World::SetParentWorld(World *p)
 
 double World::GoalFunction(double x, double y)
 {
-    return pow(sqrt((x-destX)*(x-destX)+(y-destY)*(y-destY))-rBubble,1);
+    return pow(sqrt((x-destX)*(x-destX)+(y-destY)*(y-destY))-rBubble,2);
 }

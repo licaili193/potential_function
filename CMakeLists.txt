@@ -22,7 +22,6 @@ include(${wxWidgets_USE_FILE})
 include_directories(
   ${catkin_INCLUDE_DIRS}
   include/${PROJECT_NAME}
-  ${OpenCV_INCLUDE_DIRS}
   include/mathgl
 )
 
@@ -41,7 +40,8 @@ src/obstacle.cpp
 src/sphere.cpp 
 src/square.cpp
 src/sphereWorld.cpp
-src/starWorld.cpp)
+src/starWorld.cpp
+src/purgedWorld.cpp)
 
 target_link_libraries(nf_visualization
    ${catkin_LIBRARIES}

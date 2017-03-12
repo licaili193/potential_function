@@ -13,6 +13,7 @@ public:
    void SetCenter(double x, double y);
    virtual double Beta(double x, double y) {return 0;}
    virtual double Rho(double x, double y) {return 0;}
+   virtual double GetMax() {return 0;}
 };
 
 #endif
