@@ -11,6 +11,9 @@ find_package(catkin REQUIRED COMPONENTS
 
 find_package(wxWidgets COMPONENTS core base REQUIRED)
 
+find_package( PkgConfig REQUIRED)
+pkg_check_modules( gsl REQUIRED gsl )
+
 catkin_package(
   INCLUDE_DIRS include
   CATKIN_DEPENDS roscpp rospy std_msgs

@@ -1,5 +1,6 @@
 #include "world.h"
 #include <cmath>
+#include <cstddef>
 
 using namespace std;
 
@@ -12,7 +13,7 @@ World::World(double xs, double xe, double ys, double ye, double st, Obstacle* o)
 World::World()
 {
     destX = destY = 0;
-    _parentWorld = nullptr;
+    _parentWorld = NULL;
 }
 
 void World::SetFrame(double xs, double xe, double ys, double ye, double st)
@@ -24,7 +25,7 @@ void World::SetFrame(double xs, double xe, double ys, double ye, double st)
     _steps = st;
 
     destX = destY = rBubble = 0;
-    _parentWorld = nullptr;
+    _parentWorld = NULL;
 }
 
 void World::GetFrame(double &xs, double &xe, double &ys, double &ye, double &st)

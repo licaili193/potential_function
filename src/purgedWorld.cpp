@@ -9,15 +9,15 @@ using namespace std;
 
 PurgedWorld::PurgedWorld()
 {
-    virtObs = nullptr;
-    newObs = nullptr;
+    virtObs = NULL;
+    newObs = NULL;
     gap = 0.05;
 }
 
 PurgedWorld::PurgedWorld(double xs, double xe, double ys, double ye, double st, Obstacle* o):World(xs,xe,ys,ye,st,o)
 {
-    virtObs = nullptr;
-    newObs = nullptr;
+    virtObs = NULL;
+    newObs = NULL;
     gap = 0.05;
 }
 
