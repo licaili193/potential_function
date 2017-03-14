@@ -68,7 +68,7 @@ MainFrame::MainFrame(wxWindow* parent, int id, const wxString& title, const wxPo
     theSquare3.SetCenter(2,1.4);
     theSquare3.SetRadius(0.6);
     theSquare3.SetScale(1,2);
-    theSquare3.parentObs = &theSphere1;
+    theSquare3.parentObs = &theSquare1;
     theWorld2.SetFrame(-4.2,4.2,-4.2,4.2,0.02);
     theWorld2.mainObs = &theSquare;
     theWorld2.obsArray.push_back(&theSquare1);
@@ -85,7 +85,7 @@ MainFrame::MainFrame(wxWindow* parent, int id, const wxString& title, const wxPo
     theSquare4.SetCenter(1.4,2);
     theSquare4.SetRadius(0.6);
     theSquare4.SetScale(2,1);
-    theSquare4.parentObs = &theSphere1;
+    theSquare4.parentObs = &theSquare1;
     theWorld3.SetFrame(-4.2,4.2,-4.2,4.2,0.02);
     theWorld3.mainObs = &theSquare;
     theWorld3.obsArray.push_back(&theSquare1);

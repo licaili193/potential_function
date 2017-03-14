@@ -5,6 +5,16 @@
 #include "std_msgs/String.h"
 #include <pthread.h>
 
+#include <string>
+
+using namespace std;
+
+struct params {
+        pthread_mutex_t mutex;
+        pthread_cond_t done;
+        string cmd;
+};
+
 class ROSListener
 {
     pthread_t thread;

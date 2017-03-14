@@ -44,7 +44,8 @@ src/sphere.cpp
 src/square.cpp
 src/sphereWorld.cpp
 src/starWorld.cpp
-src/purgedWorld.cpp)
+src/purgedWorld.cpp
+src/worldManager.cpp)
 
 target_link_libraries(nf_visualization
    ${catkin_LIBRARIES}
