@@ -14,18 +14,16 @@
 #include "starWorld.h"
 #include "purgedWorld.h"
 
+#include "worldManager.h"
+#include "roslistener.h"
+
 // begin wxGlade: ::extracode
 // end wxGlade
 
-class ROSTimer : public wxTimer
-{
-public:
-    void Notify();
-    void start();
-};
-
 class MainFrame: public wxFrame {
     void OnExit(wxCommandEvent& event);
+
+    wxTimer* m_pTimer;
 public:
     // begin wxGlade: MainFrame::ids
     // end wxGlade
@@ -40,26 +38,16 @@ public:
 
     //THE PLOT THINGS
 	Visualizer thePlot;
-    Sphere theSphere;
-    Sphere theSphere1;
-    Sphere theSphere2;
-    SphereWorld theWorld;
-
-    Square theSquare;
-    Square theSquare1;
-    Square theSquare2;
-    StarWorld theWorld1;
-
-    Square theSquare3;
-    PurgedWorld theWorld2;
-
-    Square theSquare4;
-    PurgedWorld theWorld3;
+    WorldManager theWorlds;
 
     // begin wxGlade: MainFrame::attributes
     wxStaticBox* sizer_1_staticbox;
     wxPanel* graphPanel;
     // end wxGlade
+
+    void CmdPhraser(params* pCmd);
+
+    void OnTimerTimeout(wxTimerEvent& event);
 
 protected:
     DECLARE_EVENT_TABLE()
@@ -67,6 +55,7 @@ protected:
 
 BEGIN_EVENT_TABLE(MainFrame, wxFrame)
 	EVT_PAINT(MainFrame::OnPaint)
+    EVT_TIMER(10,MainFrame::OnTimerTimeout)
 END_EVENT_TABLE();
 
 #endif // GRAPHTEST_H

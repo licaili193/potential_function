@@ -179,3 +179,8 @@ bool WorldManager::LoadSample()
     tempWorld->SetParentWorld(GetWorld(2));
     _worldVector.push_back(tempWorld);
 }
+
+void WorldManager::SetGoal(double x, double y)
+{
+    for(int i=0;i<_worldVector.size();i++) {_worldVector[i]->destX=x;_worldVector[i]->destY=y;};
+}

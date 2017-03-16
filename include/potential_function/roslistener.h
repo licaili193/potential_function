@@ -23,7 +23,7 @@ public:
 
     void Start();
     int Kill();
-    static void *Run(void *threadid);
+    static void *Run(void *msg);
     static void cmdCallback(const std_msgs::String::ConstPtr& msg);
 };
 

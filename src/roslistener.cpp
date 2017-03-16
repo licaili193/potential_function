@@ -6,10 +6,14 @@
 
 #include "roslistener.h"
 
+params Msg;
+
 void ROSListener::Start()
 {
     int rc;
-    rc = pthread_create(&thread, NULL, Run, (void *)0);
+    Msg.mutex = PTHREAD_MUTEX_INITIALIZER;
+    //Msg.done = PTHREAD_COND_INITIALIZER;
+    rc = pthread_create(&thread, NULL, Run, (void *)&Msg);
 }
 
 int ROSListener::Kill()
@@ -21,13 +25,16 @@ int ROSListener::Kill()
 
 ROSListener::~ROSListener()
 {
-    //system("rosnode kill nf_visualization"); 
-    //pthread_exit(NULL);
+    pthread_mutex_destroy(&Msg.mutex);
 }
 
 void ROSListener::cmdCallback(const std_msgs::String::ConstPtr& msg)
 {
     std::cout<<"I heard: "<<msg->data.c_str()<<std::endl;
+    pthread_mutex_lock(&Msg.mutex);
+    Msg.cmd = msg->data.c_str();
+    pthread_mutex_unlock(&Msg.mutex);
+
     if(msg->data=="exit") 
     {
         system("rosnode kill nf_visualization"); 
@@ -35,7 +42,7 @@ void ROSListener::cmdCallback(const std_msgs::String::ConstPtr& msg)
     }
 }
 
-void * ROSListener::Run(void *threadid)
+void * ROSListener::Run(void *msg)
 {   
     int argc = 0;
     char **argv = NULL;

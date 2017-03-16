@@ -18,7 +18,7 @@ int main(int argc, char **argv)
     {
         string cmd;
         cout<<"Please input the command: ";
-        cin>>cmd;
+        getline(cin,cmd);
         
         std_msgs::String msg;
         msg.data = cmd.c_str();

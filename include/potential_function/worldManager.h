@@ -23,6 +23,7 @@ public:
     bool LoadSample();
     World* GetWorld(int id);
     void ClearAll();
+    void SetGoal(double x, double y);
 };
 
 #endif
