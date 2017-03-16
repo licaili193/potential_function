@@ -25,6 +25,7 @@ public:
 };
 
 class MainFrame: public wxFrame {
+    void OnExit(wxCommandEvent& event);
 public:
     // begin wxGlade: MainFrame::ids
     // end wxGlade

@@ -22,6 +22,7 @@ public:
     ~ROSListener();
 
     void Start();
+    int Kill();
     static void *Run(void *threadid);
     static void cmdCallback(const std_msgs::String::ConstPtr& msg);
 };

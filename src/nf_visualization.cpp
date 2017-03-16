@@ -154,9 +154,15 @@ void MainFrame::OnPaint(wxPaintEvent &event)
 	delete dc;
 }
 
+void MainFrame::OnExit(wxCommandEvent& event)
+{
+    Close( true );
+}
+
 class GraphTestApp: public wxApp {
 public:
     bool OnInit();
+    int OnExit();
     ROSListener rl;
 };
 
@@ -171,4 +177,11 @@ bool GraphTestApp::OnInit()
     
     rl.Start();
     return true;
+}
+
+int GraphTestApp::OnExit()
+{
+    cout<<"About to kill the listener thread."<<endl;
+    rl.Kill();
+    return 0;
 }

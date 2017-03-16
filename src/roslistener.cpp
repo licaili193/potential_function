@@ -12,9 +12,17 @@ void ROSListener::Start()
     rc = pthread_create(&thread, NULL, Run, (void *)0);
 }
 
+int ROSListener::Kill()
+{
+    system("rosnode kill nf_visualization"); 
+    //pthread_exit(NULL);
+    return 0;
+}
+
 ROSListener::~ROSListener()
 {
-    pthread_exit(NULL);
+    //system("rosnode kill nf_visualization"); 
+    //pthread_exit(NULL);
 }
 
 void ROSListener::cmdCallback(const std_msgs::String::ConstPtr& msg)
@@ -23,7 +31,7 @@ void ROSListener::cmdCallback(const std_msgs::String::ConstPtr& msg)
     if(msg->data=="exit") 
     {
         system("rosnode kill nf_visualization"); 
-        pthread_exit(NULL);
+        //pthread_exit(NULL);
     }
 }
 
@@ -36,4 +44,5 @@ void * ROSListener::Run(void *threadid)
     ROS_INFO("This node will create a window for visualization.");
     ros::Subscriber sub = n.subscribe("nf_cmd", 1000, cmdCallback);
     ros::spin();
+    pthread_exit(NULL);
 }
