@@ -64,8 +64,8 @@ double PurgedWorld::PotentialValue(double x, double y, double kappa)
 
     double betaP = theParentBeta+(2*gap-theNewBeta)+sqrt(theParentBeta*theParentBeta+(2*gap-theNewBeta)*(2*gap-theNewBeta));
 
-    double tempB = gamma*product*betaP;
-    double s0 = tempB/(tempB-kappa*theNewBeta);
+    double tempB = -gamma*product*betaP;
+    double s0 = tempB/(tempB+kappa*theNewBeta);
 
     double theS = 1-s0;
 

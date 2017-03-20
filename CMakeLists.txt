@@ -7,12 +7,20 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   rospy
   std_msgs
+  genmsg
 )
 
 find_package(wxWidgets COMPONENTS core base REQUIRED)
 
 find_package( PkgConfig REQUIRED)
 pkg_check_modules( gsl REQUIRED gsl )
+
+add_service_files(FILES GetPotentialGrad.srv)
+
+generate_messages(
+  DEPENDENCIES
+  std_msgs
+)
 
 catkin_package(
   INCLUDE_DIRS include
@@ -53,3 +61,16 @@ target_link_libraries(nf_visualization
    ${mgl2_LIBRARIES}
 )
 
+add_executable(nf_server 
+src/gradServer.cpp
+src/world.cpp 
+src/obstacle.cpp 
+src/sphere.cpp 
+src/square.cpp
+src/sphereWorld.cpp
+src/starWorld.cpp
+src/purgedWorld.cpp
+src/worldManager.cpp)
+
+target_link_libraries(nf_server ${catkin_LIBRARIES} ${mgl2_LIBRARIES})
+add_dependencies(nf_server ${PROJECT_NAME}_generate_messages_cpp)

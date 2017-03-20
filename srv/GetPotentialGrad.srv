@@ -1,0 +1,9 @@
+float64 x
+float64 y
+float64 gx
+float64 gy
+---
+int32 res 
+float64 dx
+float64 dy
+float64 g
