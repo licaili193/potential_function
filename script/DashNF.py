@@ -101,23 +101,14 @@ def proc():
         t_ori = t_ori-2*math.pi
     res = nf_client()
     if res[0] == 0:
-        direction = math.atan2(-res[2],-res[1]) - theta + math.pi/2
-	
-        if direction>math.pi:
-            direction = direction - 2*math.pi
-        if direction<=-math.pi:
-            direction = direction + 2*math.pi
-        print "Yaw->"+str(direction)+" Theta->"+str(theta)
-        if direction<-math.pi/2:
-            cmd._commandPhaser('wheel,0,-20')
-        elif direction<0:
-            cmd._commandPhaser("wheel,"+str(prop(1,20,res[3]/(res[3]+0.01)))+","+str(-prop(math.pi/2,20,-direction)))
-            #cmd._commandPhaser("wheel,"+str(0)+","+str(-prop(math.pi/2,50,-direction)))
-        elif direction>math.pi/2:
-            cmd._commandPhaser('wheel,0,20')
-        else:
-            cmd._commandPhaser("wheel,"+str(prop(1,20,res[3]/(res[3]+0.01)))+","+str(prop(math.pi/2,20,direction)))
-	    #cmd._commandPhaser("wheel,"+str(0)+","+str(prop(math.pi/2,50,direction)))
+        v = math.cos(theta-math.pi/2)*(-res[1])+math.sin(theta-math.pi/2)*(-res[2]);
+        w = -math.sin(theta-math.pi/2)*(-res[1])+math.cos(theta-math.pi/2)*(-res[2]);
+        print "v->" +str(v) +" w->" +str(w) +" theta->" +str(theta-math.pi/2)
+        vol = prop(1,100*res[3]/(res[3]+0.1),v)
+        #vol = prop(1,300,v)
+        dic = prop(1,300,w)
+        print "vo->" +str(vol) +" wm->" +str(dic)
+        cmd._commandPhaser("wheel,"+str(vol)+","+str(dic))
     else:
         print "Cannot Run NF."
     

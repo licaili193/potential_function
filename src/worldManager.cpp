@@ -63,25 +63,25 @@ bool WorldManager::LoadSample()
     //Obstacle: s1
     tempObs.first = "s1";
     tempObs.second = new Sphere;
-    tempObs.second->SetCenter(0.417,1.859);
+    tempObs.second->SetCenter(0.26,0.565);
     static_cast<Sphere*>(tempObs.second)->SetRadius(1.622);
     _obsMap.insert(tempObs);
     //Obstacle: s2
     tempObs.first = "s2";
     tempObs.second = new Sphere;
-    tempObs.second->SetCenter(-0.004,1.361);
+    tempObs.second->SetCenter(-0.175,0.085);
     static_cast<Sphere*>(tempObs.second)->SetRadius(0.239);
     _obsMap.insert(tempObs);
     //Obstacle: s3
     tempObs.first = "s3";
     tempObs.second = new Sphere;
-    tempObs.second->SetCenter(0.927,2.272);
+    tempObs.second->SetCenter(0.73,1.01);
     static_cast<Sphere*>(tempObs.second)->SetRadius(0.245);
     _obsMap.insert(tempObs);
 
     //World: 0
     tempWorld = new SphereWorld;
-    tempWorld->SetFrame(-1.405,2.239,0.037,3.681,0.01);
+    tempWorld->SetFrame(-1.562,2.082,-1.257,2.387,0.01);
     tempWorld->mainObs = FindObstacle("s1");
     tempWorld->obsArray.push_back(FindObstacle("s2"));
     tempWorld->obsArray.push_back(FindObstacle("s3"));
@@ -94,7 +94,7 @@ bool WorldManager::LoadSample()
     //Obstacle: q1
     tempObs.first = "q1";
     tempObs.second = new Square;
-    tempObs.second->SetCenter(0.417,1.859);
+    tempObs.second->SetCenter(0.26,0.565);
     static_cast<Square*>(tempObs.second)->SetRadius(1.081);
     static_cast<Square*>(tempObs.second)->SetScale(1,1);
     tempObs.second->parentObs = FindObstacle("s1");
@@ -102,7 +102,7 @@ bool WorldManager::LoadSample()
     //Obstacle: q2
     tempObs.first = "q2";
     tempObs.second = new Square;
-    tempObs.second->SetCenter(-0.004,1.361);
+    tempObs.second->SetCenter(-0.175,0.085);
     static_cast<Square*>(tempObs.second)->SetRadius(0.239);
     static_cast<Square*>(tempObs.second)->SetScale(1,1);
     tempObs.second->parentObs = FindObstacle("s2");
@@ -110,7 +110,7 @@ bool WorldManager::LoadSample()
     //Obstacle: q3
     tempObs.first = "q3";
     tempObs.second = new Square;
-    tempObs.second->SetCenter(0.927,2.272);
+    tempObs.second->SetCenter(0.73,1.01);
     static_cast<Square*>(tempObs.second)->SetRadius(0.245);
     static_cast<Square*>(tempObs.second)->SetScale(1,1);
     tempObs.second->parentObs = FindObstacle("s3");
@@ -118,7 +118,7 @@ bool WorldManager::LoadSample()
 
     //World: 1
     tempWorld = new StarWorld;
-    tempWorld->SetFrame(-0.864,1.698,0.578,3.14,0.01);
+    tempWorld->SetFrame(-1.021,1.541,-0.716,1.846,0.01);
     tempWorld->mainObs = FindObstacle("q1");
     tempWorld->obsArray.push_back(FindObstacle("q2"));
     tempWorld->obsArray.push_back(FindObstacle("q3"));
@@ -132,7 +132,7 @@ bool WorldManager::LoadSample()
     //Obstacle: q4
     tempObs.first = "q4";
     tempObs.second = new Square;
-    tempObs.second->SetCenter(0.763,2.272);
+    tempObs.second->SetCenter(0.56,1.01);
     static_cast<Square*>(tempObs.second)->SetRadius(0.235);
     static_cast<Square*>(tempObs.second)->SetScale(2,1);
     tempObs.second->parentObs = FindObstacle("q2");
@@ -140,7 +140,7 @@ bool WorldManager::LoadSample()
 
     //World: 2
     tempWorld = new PurgedWorld;
-    tempWorld->SetFrame(-0.864,1.698,0.578,3.14,0.01);
+    tempWorld->SetFrame(-1.021,1.541,-0.716,1.846,0.01);
     tempWorld->mainObs = FindObstacle("q1");
     tempWorld->obsArray.push_back(FindObstacle("q2"));
     tempWorld->obsArray.push_back(FindObstacle("q3"));
@@ -157,7 +157,7 @@ bool WorldManager::LoadSample()
     //Obstacle: q5
     tempObs.first = "q5";
     tempObs.second = new Square;
-    tempObs.second->SetCenter(0.927,2.12);
+    tempObs.second->SetCenter(0.73,0.87);
     static_cast<Square*>(tempObs.second)->SetRadius(0.235);
     static_cast<Square*>(tempObs.second)->SetScale(1,2);
     tempObs.second->parentObs = FindObstacle("q2");
@@ -165,7 +165,7 @@ bool WorldManager::LoadSample()
 
     //World: 3
     tempWorld = new PurgedWorld;
-    tempWorld->SetFrame(-0.864,1.698,0.578,3.14,0.01);
+    tempWorld->SetFrame(-1.021,1.541,-0.716,1.846,0.01);
     tempWorld->mainObs = FindObstacle("q1");
     tempWorld->obsArray.push_back(FindObstacle("q2"));
     tempWorld->obsArray.push_back(FindObstacle("q3"));
