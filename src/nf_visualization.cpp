@@ -159,7 +159,7 @@ void MainFrame::CmdPhraser(params* pCmd)
             {
                 double x,y;
                 sscanf(args[1].c_str(),"%lf",&x);
-                sscanf(args[1].c_str(),"%lf",&y);
+                sscanf(args[2].c_str(),"%lf",&y);
                 cout<<x<<" "<<y<<endl;
                 theWorlds.SetGoal(x,y);
                 thePlot.SetBoundaryPlotData(*theWorlds.GetWorld(sCurrentWorld));

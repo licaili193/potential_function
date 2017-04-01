@@ -102,13 +102,20 @@ def proc():
     res = nf_client()
     if res[0] == 0:
         v = math.cos(theta-math.pi/2)*(-res[1])+math.sin(theta-math.pi/2)*(-res[2]);
-        w = -math.sin(theta-math.pi/2)*(-res[1])+math.cos(theta-math.pi/2)*(-res[2]);
+        w = -2*math.sin(theta-math.pi/2)*(-res[1])+math.cos(theta-math.pi/2)*(-res[2]);
         print "v->" +str(v) +" w->" +str(w) +" theta->" +str(theta-math.pi/2)
-        vol = prop(1,100*res[3]/(res[3]+0.1),v)
+        vol = prop(0.6,400*res[3]/(0.1+res[3]),v)
         #vol = prop(1,300,v)
-        dic = prop(1,300,w)
+        dic = prop(2.23,300,w)
+        if vol>400: vol = 400
+	if vol<-400: vol = -400
+	if dic>300: dic = 300	
+	if dic<-300: dic = -300
         print "vo->" +str(vol) +" wm->" +str(dic)
-        cmd._commandPhaser("wheel,"+str(vol)+","+str(dic))
+        vol = vol/2
+        dic = dic/3
+	vol = vol*(1-float(abs(dic))/(float(abs(dic))+10.0))
+        cmd._commandPhaser("wheel,"+str(int(vol))+","+str(dic))
     else:
         print "Cannot Run NF."
     
