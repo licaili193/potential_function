@@ -30,7 +30,7 @@ void Square::SetScale(double sx, double sy, double _s)
 
 double Square::Beta(double x, double y)
 {
-    return (pow((x-centerX)/scaleX,2)+pow((y-centerY)/scaleY,2)+sqrt(pow(pow((x-centerX)/scaleX,2)+pow((y-centerY)/scaleY,2),2)-4*s*s*pow((x-centerX)/scaleX,2)*pow((y-centerY)/scaleY,2)))/2-radius*radius;
+    return (pow((x-centerX)/scaleX,2)+pow((y-centerY)/scaleY,2)+sqrt(pow(pow((x-centerX)/scaleX,2)-pow((y-centerY)/scaleY,2),2)+(1-s*s)*pow((x-centerX)/scaleX,2)*pow((y-centerY)/scaleY,2)))-2*radius*radius;
 }
 
 double Square::Rho(double x, double y)
@@ -44,5 +44,5 @@ double Square::Rho(double x, double y)
 
 double Square::GetMax()
 {
-    return radius*radius;
+    return 2*radius*radius;
 }

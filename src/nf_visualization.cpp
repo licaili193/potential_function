@@ -169,6 +169,40 @@ void MainFrame::CmdPhraser(params* pCmd)
                 Update();
             }
         }
+        if(args[0]=="kappa")
+        {
+            cout<<"Change kappa: ";
+            if(length>2)
+            {
+                double k;
+                int i;
+                sscanf(args[1].c_str(),"%d",&i);
+                sscanf(args[2].c_str(),"%lf",&k);
+                theWorlds.GetWorld(i)->kappa = k;
+                thePlot.SetBoundaryPlotData(*theWorlds.GetWorld(sCurrentWorld));
+                thePlot.SetPotentialPlotData(*theWorlds.GetWorld(sCurrentWorld));
+                thePlot.SetZeroPlotData(*theWorlds.GetWorld(sCurrentWorld));
+                Refresh(); 
+                Update();
+            }
+        }
+        if(args[0]=="lemmda")
+        {
+            cout<<"Change lemmda: ";
+            if(length>2)
+            {
+                double k;
+                int i;
+                sscanf(args[1].c_str(),"%d",&i);
+                sscanf(args[2].c_str(),"%lf",&k);
+                theWorlds.GetWorld(i)->lemmda = k;
+                thePlot.SetBoundaryPlotData(*theWorlds.GetWorld(sCurrentWorld));
+                thePlot.SetPotentialPlotData(*theWorlds.GetWorld(sCurrentWorld));
+                thePlot.SetZeroPlotData(*theWorlds.GetWorld(sCurrentWorld));
+                Refresh(); 
+                Update();
+            }
+        }
     }
 }
 //PROCESS end

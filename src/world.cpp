@@ -8,12 +8,14 @@ World::World(double xs, double xe, double ys, double ye, double st, Obstacle* o)
 {
     SetFrame(xs,xe,ys,ye,st);
     mainObs = o;
+    lemmda = 1;
 }
 
 World::World()
 {
     destX = destY = 0;
     _parentWorld = NULL;
+    lemmda = 1;
 }
 
 void World::SetFrame(double xs, double xe, double ys, double ye, double st)
@@ -44,5 +46,6 @@ void World::SetParentWorld(World *p)
 
 double World::GoalFunction(double x, double y)
 {
-    return pow(sqrt((x-destX)*(x-destX)+(y-destY)*(y-destY))-rBubble,2);
+    //return pow(sqrt((x-destX)*(x-destX)+(y-destY)*(y-destY))-rBubble,2);
+    return abs(sqrt((x-destX)*(x-destX)+(y-destY)*(y-destY))-rBubble);
 }

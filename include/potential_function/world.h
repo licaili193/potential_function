@@ -17,6 +17,7 @@ public:
 
     double destX, destY, rBubble;
     double kappa;
+    double lemmda;
 
     World();
     World(double xs, double xe, double ys, double ye, double st, Obstacle* o);

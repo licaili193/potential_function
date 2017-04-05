@@ -55,6 +55,9 @@ _sounds = ['1853595354444153485f48495f564f',
            '1853595354564f4943453300000000',
            '1853595354564f4943453400000000']
 
+fa = [0,0,0,0,0]
+it = 0
+summ = 0
 
 def dashCallback(data):
     global x
@@ -80,10 +83,28 @@ def nf_client():
     global gx
     global gy
 
+    #global disG
+    #global Dis1
+    #global Dis2
+
+    #disG = math.sqrt((x-gx)*(x-gx)+(y-gy)*(y-gy))
+    #Dis1 = math.sqrt((gx-0.667)*(gx-0.667)+(gy+0.333)*(gy+0.333))
+    #Dis2 = math.sqrt((gx+0.5)*(gx+0.5)+(gy-1)*(gy-1))
+
+    Gx = gx
+    Gy = gy
+    #if disG>2:
+    #    if Dis1<Dis2:
+    #        Gx = 0.667
+    #        Gy = -0.333
+    #    else:
+    #        Gx = -0.5
+    #        Gy = 1
+
     rospy.wait_for_service('nf_grad')
     try:
         nf = rospy.ServiceProxy('nf_grad', GetPotentialGrad)
-        resp = nf(x, y, gx, gy)
+        resp = nf(x, y, Gx, Gy)
         return [resp.res, resp.dx, resp.dy, resp.g]
     except rospy.ServiceException, e:
         print "Service call failed: %s"%e
@@ -94,6 +115,9 @@ def prop(a, b, x):
 def proc():
     global theta
     global cmd
+    global fa
+    global it
+    global summ
     t_ori = theta-math.pi
     if t_ori<0:
         t_ori = t_ori+2*math.pi
@@ -104,7 +128,7 @@ def proc():
         v = math.cos(theta-math.pi/2)*(-res[1])+math.sin(theta-math.pi/2)*(-res[2]);
         w = -2*math.sin(theta-math.pi/2)*(-res[1])+math.cos(theta-math.pi/2)*(-res[2]);
         print "v->" +str(v) +" w->" +str(w) +" theta->" +str(theta-math.pi/2)
-        vol = prop(0.6,400*res[3]/(0.1+res[3]),v)
+        vol = prop(0.6,400*res[3]/(3+res[3]),v)
         #vol = prop(1,300,v)
         dic = prop(2.23,300,w)
         if vol>400: vol = 400
@@ -112,10 +136,10 @@ def proc():
 	if dic>300: dic = 300	
 	if dic<-300: dic = -300
         print "vo->" +str(vol) +" wm->" +str(dic)
-        vol = vol/2
-        dic = dic/3
-	vol = vol*(1-float(abs(dic))/(float(abs(dic))+10.0))
-        cmd._commandPhaser("wheel,"+str(int(vol))+","+str(dic))
+        vol = vol
+        dic = dic
+	vol = vol*(1-float(abs(dic))/(float(abs(dic))+40.0))
+        cmd._commandPhaser("wheel,"+str(int(vol/1.5))+","+str(int(dic/4)))
     else:
         print "Cannot Run NF."
     
@@ -127,7 +151,7 @@ def listener():
     rospy.Subscriber("/vicon/Goal/Goal", TransformStamped, goalCallback)
 
     while(1):
-	time.sleep(0.1)
+	time.sleep(0.2)
         proc()
 
 

@@ -27,7 +27,7 @@ void StarWorld::Ti(double x, double y, StarTiInfo &ti,  double &resX, double &re
 
     double norm = sqrt((x-ti.x0)*(x-ti.x0)+(y-ti.y0)*(y-ti.y0));
     double v;
-    if(isMain) v = (1-ti.betaSon/maxMain)*ti.rhoParent/norm;
+    if(isMain) v = (1-pow(ti.betaSon/maxMain,4))*ti.rhoParent/norm;
     else v = (1+ti.betaSon)*ti.rhoParent/norm;
 
     resX = v*(x-ti.x0)+ti.x0;

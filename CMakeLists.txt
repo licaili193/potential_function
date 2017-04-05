@@ -50,6 +50,7 @@ src/world.cpp
 src/obstacle.cpp 
 src/sphere.cpp 
 src/square.cpp
+src/rectangle.cpp
 src/sphereWorld.cpp
 src/starWorld.cpp
 src/purgedWorld.cpp
@@ -67,6 +68,7 @@ src/world.cpp
 src/obstacle.cpp 
 src/sphere.cpp 
 src/square.cpp
+src/rectangle.cpp
 src/sphereWorld.cpp
 src/starWorld.cpp
 src/purgedWorld.cpp
