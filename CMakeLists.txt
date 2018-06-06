@@ -1,7 +1,9 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(potential_function)
 
-set(mgl2_LIBRARIES /usr/local/lib/libmgl.so)
+set (CMAKE_CXX_STANDARD 11)
+
+include(FindMathGL.cmake)
 
 find_package(catkin REQUIRED COMPONENTS
   roscpp
@@ -14,6 +16,8 @@ find_package(wxWidgets COMPONENTS core base REQUIRED)
 
 find_package( PkgConfig REQUIRED)
 pkg_check_modules( gsl REQUIRED gsl )
+
+find_package(MathGL)
 
 add_service_files(FILES GetPotentialGrad.srv)
 
@@ -33,7 +37,7 @@ include(${wxWidgets_USE_FILE})
 include_directories(
   ${catkin_INCLUDE_DIRS}
   include/${PROJECT_NAME}
-  include/mathgl
+  ${MathGL_INCLUDE_DIRS}
 )
 
 add_executable(nf_tester src/main.cpp)
@@ -58,7 +62,7 @@ src/worldManager.cpp)
 target_link_libraries(nf_visualization
    ${catkin_LIBRARIES}
    ${wxWidgets_LIBRARIES}
-   ${mgl2_LIBRARIES}
+   ${MathGL_LIBRARIES}
 )
 
 add_executable(nf_server 
