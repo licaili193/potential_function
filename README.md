@@ -1,8 +1,8 @@
 # Potential Function
 
-Robot Navigation with Potential Functions Toolkit. This ROS toolkit is written by Caili Li (caili@udel.edu) for the master thesis of the MSME program at the University of Delaware. 
+Robot Navigation with Potential Functions Toolkit. This ROS toolkit is written by __Caili Li__ (caili@udel.edu) for the master thesis of the MSME program at the University of Delaware. 
 
-Advisor: Herbert G. Tanner (btanner@udel.edu)
+Advisor: __Herbert G. Tanner__ (btanner@udel.edu)
 
 ## Dependences
 
