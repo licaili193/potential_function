@@ -54,3 +54,14 @@ Visualize contour plots of each layers of the navigation function worlds. There 
   - __Example__: `world 0` The command above will plot the sphere world of the navigation function
 
 ### `nf_server`
+
+## Navigation Functions Construction
+
+### World
+
+The navigation function is constructed with different layers of the worlds. At each layer, when a valid navigation function is built, a diffeomorphic transformation can be constructed to transform the current layer of the world to the next layer. Finally, the navigation function will be in the shape that we want. The typical layout setting for a navigation function is: __sphere world -> star world -> purged world 1 -> ... purged world n (final navigation function)__ 
+
+![World 0](https://github.com/licaili193/potential_function/raw/master/screenshots/world0.png "The Zeroth World")
+![World 1](https://github.com/licaili193/potential_function/raw/master/screenshots/world1.png "The First World")
+![World 2](https://github.com/licaili193/potential_function/raw/master/screenshots/world2.png "The Second World")
+![World 3](https://github.com/licaili193/potential_function/raw/master/screenshots/world3.png "The Thrid World")
